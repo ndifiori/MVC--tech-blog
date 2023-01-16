@@ -1,5 +1,5 @@
 
-// let's create a middleware function to check for user authenticationm
+// let's create a middleware function to check for user authentication
   
   // if the userID property is not set on the req.session THEN redirect to the login page 
   // else if the userID property is set call the next function 

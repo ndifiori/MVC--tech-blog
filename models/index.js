@@ -7,6 +7,12 @@ const Comment = require('./comment');
 
 // let's define relationships between models
 
+// user can have many posts 
+  // the posts model will have a FK of userId
+User.hasMany(Post, {
+  foreignKey: 'userId'
+})
+
 // post belongs to User table with a FK of userid
   // so when a user is delete so are all their posts
 Post.belongsTo(User, {

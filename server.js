@@ -31,7 +31,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 // sess is an object that contains configuration options for the session middleware 
   // it specifies how the session should be stored and managed by the server.
 const sess = {
-  secret: 'secret',
+  secret: 'Super secret secret',
   cookie: {
     maxAge: 300000,
     httpOnly: true,

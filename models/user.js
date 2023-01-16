@@ -38,7 +38,7 @@ User.init(
     }
   },
   {
-    // let's create a hooks which in this case will run before and after a specific event in our model 
+    // let's create a hook which in this case will run before and after a specific event in our model 
     hooks: {
       // the beforeCreate hook will be run before a new user is created 
       beforeCreate: async (newUserData) => {

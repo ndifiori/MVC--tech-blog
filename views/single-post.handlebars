@@ -1,0 +1,89 @@
+
+{{!-- this is the template for the post/:id endpoint --}}
+
+{{!-- so for the post part we are going to follow the same format we used for the all posts  --}}
+  {{!-- below we will add the related comments and the users of those comments --}}
+
+<div class="post">
+
+  <article class="card">
+
+    <div class="card-header flex-row justify-space-between">
+
+      <h2>{{post.title}}</h2>
+
+      <div>
+        Posted by {{post.User.username}} on {{format_date post.createdAt}}
+      </div>
+
+    </div>
+
+    <div class="card-body">
+      {{post.body}}
+    </div>
+
+  </article>
+
+  {{!-- here is where we are going to be added in the comments for the single post that we queried by the id parameter of the URL --}}
+
+    {{!-- the if will act like just like our traditional if statement and check whether the queried post has associated comments  --}}
+
+      {{!-- if the post has comments --}}
+        {{!-- run an each helper function on the comments --}}
+          {{!-- for each post comment it will create template that contains the comment body, user of the comment, and date created --}}
+            {{!-- the mdash will create a (-) between the useranme and date --}}
+
+  {{#if post.Comments}}
+
+    <section class="card">
+
+      <div class="card-header">
+        <h3>Comments</h3>
+      </div>
+
+      <div class="card-body">
+
+        {{#each post.Comments}}
+
+          <div>
+            <p>
+              {{body}}
+            </p>
+
+            <p>
+              &mdash; {{User.username}}, {{format_date createdAt}}
+            </p>
+
+          </div>
+
+        {{/each}}
+
+      </div>
+
+    </section>
+
+  {{/if}}
+
+  {{!-- this is html for a form for a new comment for the post--}}
+    {{!-- the important part of this is form is the hidden input is the post id which will store the new comment under the corrent post id --}}
+
+  <form id="new-comment-form" class="card">
+    <div class="card-header">
+      <h3>Add New Comment</h3>
+    </div>
+
+    <div class="card-body">
+      <input type="hidden" name="post-id" value="{{post.id}}" />
+
+      <label class="form-label" for="comment-body">Comment</label>
+
+      <textarea name="comment-body" class="form-input"></textarea>
+
+      <button type="submit" class="btn">Submit</button>
+    </div>
+  </form>
+</div>
+
+<script src="/js/comment.js"></script>
+
+  

@@ -1,0 +1,39 @@
+
+{{!-- template for the / endpoint  --}}
+
+{{!-- this will iterate through our array of posts and create an HTML template for each post --}}
+
+  {{!-- when we found all posts we included the user model  --}}
+    {{!-- this will give us access to the username and date it was created on --}}
+
+  {{!-- when we found all the posts by the primary key --}}
+    {{!-- this gave us access to the title and body of the posts --}}
+
+<div class="posts">
+
+{{#each posts}}
+
+<article class="card">
+
+  <div class="card-header flex-row justify-space-between">
+
+    <h2>
+      <a href="/post/{{id}}">{{title}}</a>
+    </h2>
+
+    <div>
+      Posted by {{User.username}} on {{format_date createdAt}}
+    </div>
+
+  </div>
+
+  <div class="card-body">
+    {{body}}
+  </div>
+
+</article>
+
+{{/each}}
+
+</div>
+
