@@ -18,9 +18,8 @@ const withAuth = require('../../utils/auth');
 
   // once we create the new post we use the res.json to return a json response to the client
 router.post('/', withAuth, async (req, res) => {
-  const body = req.body;
-
   try {
+    const body = req.body;
     const newPost = await Post.create({ ...body, userId: req.session.userId });
     res.json(newPost);
   } catch (err) {
@@ -38,7 +37,8 @@ router.post('/', withAuth, async (req, res) => {
       // else send a not found status code (post is not there to update)
 router.put('/:id', withAuth, async (req, res) => {
   try {
-    const [affectedRows] = await Post.update(req.body, {
+    const post = req.body
+    const [affectedRows] = await Post.update(post, {
       where: {
         id: req.params.id,
       },

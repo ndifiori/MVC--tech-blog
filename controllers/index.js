@@ -8,7 +8,7 @@ const router = require('express').Router();
 const homeRoutes = require('./home-routes.js');
 
 // import routes for dashboard enpoints --> routes defined in the file located in ./dashboard-routes
-const dashboardRoutes = require('./dashboard-routes.js');
+const dashboardRoutes = require('./dashboard-routes');
 
 // import routes for API endpont --> routes defined in the file located in the ./api
 const apiRoutes = require('./api');

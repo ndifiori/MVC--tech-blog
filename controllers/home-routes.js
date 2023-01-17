@@ -4,7 +4,7 @@
 const router = require('express').Router();
 
 // destructuring to import post, comment, user from our models folder
-const { Post, Comment, User } = require('../models/');
+const { Post, Comment, User } = require('../models/index');
 
 
 // get all posts for homepage
@@ -15,17 +15,12 @@ const { Post, Comment, User } = require('../models/');
 router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ['username']
-        }
-      ],
+      include: [User],
     });
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render('all-posts', { posts, loggedIn: req.session.loggedIn});
+    res.render('all-posts', { posts });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -63,9 +58,8 @@ router.get('/post/:id', async (req, res) => {
     if (postData) {
       console.log(postData)
       const post = postData.get({ plain: true });
-      const userData = req.session.userID == post.user.id
 
-      res.render('single-post', { post, userData, loggedIn: req.session.loggedIn });
+      res.render('single-post', { post });
     } else {
       res.status(404).end();
     }

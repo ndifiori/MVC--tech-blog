@@ -3,7 +3,7 @@
 const router = require('express').Router();
 
 // destructuring to bring in the user model
-const { User } = require('../../models');
+const { User } = require('../../models/');
 
 
 // post request for the / endpoint for the user routes to create a new user in the user model

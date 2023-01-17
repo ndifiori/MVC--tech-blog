@@ -16,12 +16,14 @@ const withAuth = require('../../utils/auth');
     // we use the spread operator to incude all of the data from the req.body
 
   // then we use the res.json() method to convert our object to a JSON to send to the client
-router.post('/comment', withAuth, async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
+    const data = req.body
+    const sessionId = req.session.userId 
+
     const newComment = await Comment.create({
-      content: req.body.content,
-      user_comment_id: req.session.userId,
-      post_id: req.body.postId
+      ...data,
+      userId: sessionId
     });
     res.json(newComment);
   } catch (err) {
