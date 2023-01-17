@@ -15,12 +15,17 @@ const { Post, Comment, User } = require('../models/');
 router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll({
-      include: [User],
+      include: [
+        {
+          model: User,
+          attributes: ['username']
+        }
+      ],
     });
-    console.log(typeof postData);
+
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render('all-posts', { posts });
+    res.render('all-posts', { posts, loggedIn: req.session.loggedIn});
   } catch (err) {
     res.status(500).json(err);
   }
@@ -58,8 +63,9 @@ router.get('/post/:id', async (req, res) => {
     if (postData) {
       console.log(postData)
       const post = postData.get({ plain: true });
+      const userData = req.session.userID == post.user.id
 
-      res.render('single-post', { post });
+      res.render('single-post', { post, userData, loggedIn: req.session.loggedIn });
     } else {
       res.status(404).end();
     }

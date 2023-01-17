@@ -3,19 +3,20 @@
 const { Post } = require('../models')
 
 const postData = [
+  
   {
-    title: "postnumber1",
-    body: "I am post 1",
-    foreignKey: "userId"
+    title: 'postnumber1',
+    content: 'I am post 1',
+    user_id: 1
   },
   {
-    title: "postnumber2",
-    body: "I am post 2",
-    foreignKey: "userId"
+    title: 'postnumber2',
+    content: 'I am post 2',
+    user_id: 2
 
   }
 ]
 
-const seedPostData = () ==> User.bulkCreate(postData);
+const seedPostData = () => Post.bulkCreate(postData);
 
 module.exports = seedPostData;

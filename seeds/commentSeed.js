@@ -3,17 +3,17 @@ const { Comment } = require('../models');
 
 const commentData = [
   {
-   comment: "good job",
-   foreignKey: "userId",
-   foreignKey: "postId"
+   content: 'good job',
+   user_comment_id: 2,
+   post_id: 1
   },
   {
-    comment: "hello spongebob",
-    foreignKey: "userId",
-    foreignKey: "postId"
+    content: 'hello spongebob',
+    user_comment_id: 1,
+    post_id: 2
   }
 ]
 
-const seedCommentData = () ==> User.bulkCreate(commentData);
+const seedCommentData = () => Comment.bulkCreate(commentData);
 
 module.exports = seedCommentData;

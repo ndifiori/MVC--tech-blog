@@ -10,13 +10,13 @@ const Comment = require('./comment');
 // user can have many posts 
   // the posts model will have a FK of userId
 User.hasMany(Post, {
-  foreignKey: 'userId'
+  foreignKey: 'user_id',
 })
 
 // post belongs to User table with a FK of userid
   // so when a user is delete so are all their posts
 Post.belongsTo(User, {
-  foreignKey: 'userId',
+  foreignKey: 'user_id',
   onDelete: 'CASCADE'
 });
 
@@ -24,19 +24,24 @@ Post.belongsTo(User, {
   // the comments model has a FK of postID 
   // so when a post is deleted so are the comments 
 Post.hasMany(Comment, {
-  foreignKey: 'postId',
+  foreignKey: 'post_id',
   onDelete: 'CASCADE'
 });
 
 // comment belongs to user with a foreign key of userID
   // so when a user is deleted so are their posts
-Comment.belongsTo(User, {
-  foreignKey: 'userId',
+Comment.belongsTo(Post, {
+  foreignKey: 'post_id',
   onDelete: 'CASCADE'
 });
 
+Comment.belongsTo(Post, {
+  foreignKey: 'user_comment_id',
+  onDelete: 'CASCADE'
+})
+
 module.exports = {
   User,
-  Comment,
-  Post
+  Post,
+  Comment
 };
